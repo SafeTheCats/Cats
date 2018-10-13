@@ -1,0 +1,15 @@
+*.txt
+*.pyc
+*.log
+settings.py
+datetime_test.py
+images/
+cats/
+1.py
+eye.py
+bot.py
+face_detected.py
+handlers.py
+settings.py
+utils.py
+vtest.av
