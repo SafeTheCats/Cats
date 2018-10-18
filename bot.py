@@ -1,7 +1,7 @@
 import logging
 
 from handlers import *
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, RegexHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 import settings
 

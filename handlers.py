@@ -3,30 +3,30 @@ import os
 import time
 
 from camer_frame import get_cv2
-from utils import get_user_emo, get_keyboard, is_cat
+from utils import is_cat
 
 
 def greet_user(bot, update, user_data):
-    emo = get_user_emo(user_data)
-    user_data['emo'] = emo
-    text = 'Привет {}'.format(emo)
+    text = 'Привет {}'.format(update.message.chat.first_name)
     logging.info(text)
+    update.message.reply_text(text)
 
 
 def talk_to_me(bot, update, user_data):
-    emo = get_user_emo(user_data)
-    user_text = 'Привет, {} {}! Ты написал {}'.format(update.message.chat.first_name, emo, update.message.text)
+    user_text = 'Привет, {}! Ты написал {}'.format(update.message.chat.first_name, update.message.text)
     logging.info('User: {}, Chat id: {}, message: {}'.format(update.message.chat.username, 
                                                             update.message.chat.id, update.message.text))
+    update.message.reply_text(user_text)
 
 
 def send_camera_frame(bot, update, user_data):
     while True:
         if is_cat('gray.jpg'):
             bot.send_photo(chat_id=update.message.chat.id, photo=open('gray.jpg', 'rb'))
+            time.sleep(5)
+            logging.info('Кот обнаружен')
         else:
-            print('заново')
-        time.sleep(3)
+            time.sleep(1)
 
 
 def check_user_photo(bot, update, user_data):
