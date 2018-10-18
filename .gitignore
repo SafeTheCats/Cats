@@ -7,9 +7,9 @@ images/
 cats/
 1.py
 eye.py
-bot.py
 face_detected.py
-handlers.py
-settings.py
-utils.py
 vtest.av
+downloads/
+ad.py
+wsa.py
+
