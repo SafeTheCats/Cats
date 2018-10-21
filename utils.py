@@ -11,11 +11,11 @@ def is_cat(file_name):
     try:
         app = ClarifaiApp(api_key=settings.CLARIFAI_API)
         model = app.public_models.general_model
-        response = model.predict_by_filename(file_name, max_concepts=200)
+        response = model.predict_by_filename(file_name, max_concepts=50)
         if response['status']['code'] == 10000:
             for concept in response['outputs'][0]['data']['concepts']:
-                if concept['name'] == 'cat':
-                    print(concept['value'])
+                print(concept['name'], concept['value'])
+                if concept['name'] == 'кошка' and concept['value'] > 0.9:
                     image_has_cat = True
     except clarifai.errors.ApiError as e:
         print('Ошибка опять')
