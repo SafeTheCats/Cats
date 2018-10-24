@@ -7,12 +7,10 @@ import settings
 
 
 def get_cv2():
-    os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
-    cap = cv2.VideoCapture(settings.IP_CAMERA, cv2.CAP_FFMPEG)
+    cap = cv2.VideoCapture(0)
 
     while True:
         ret, frame = cap.read()
-        cv2.waitKey(6000)
         cv2.imwrite('gray.jpg', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

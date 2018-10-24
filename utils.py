@@ -1,3 +1,4 @@
+import logging
 from random import choice
 
 import clarifai
@@ -17,8 +18,12 @@ def is_cat(file_name):
                 if concept['name'] == 'cat':
                     print(concept['value'])
                     image_has_cat = True
+        else:
+            print(response['status']['code'])
     except clarifai.errors.ApiError as e:
+        logging.info(e)
         print('Ошибка опять')
+
     return image_has_cat
 
 
