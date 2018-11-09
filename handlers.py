@@ -45,7 +45,7 @@ def send_frame(bot, update, user_data):
             logging.info('Кот обнаружен')
             time.sleep(30)
         else:
-            time.sleep(1)
+            time.sleep(5)
 
 
 def check_photo(bot, update, user_data):
