@@ -1,6 +1,5 @@
 import logging
 import os
-from random import choice
 import time
 
 import clarifai
@@ -18,11 +17,8 @@ def is_cat(file_name):
         if response['status']['code'] == 10000:
             for concept in response['outputs'][0]['data']['concepts']:
                 if concept['name'] == 'cat':
-                    print(concept['value'])
                     logging.info(concept['value'])
                     image_has_cat = True
-        else:
-            print(response['status']['code'])
     except clarifai.errors.ApiError:
         logging.info('clarifai.errors.ApiError')
     return image_has_cat
@@ -37,12 +33,12 @@ def greet_user(bot, update, user_data):
 def talk_to_me(bot, update, user_data):
     user_text = 'Привет, {}! Ты написал {}. Введи команду /frame'.format(update.message.chat.first_name,
                                                                         update.message.text)
-    logging.info('User: {}, Chat id: {}, message: {}'.format(update.message.chat.username, 
+    logging.info('User: {}, Chat id: {}, message: {}'.format(update.message.chat.username,
                                                             update.message.chat.id, update.message.text))
     update.message.reply_text(user_text)
 
 
-def send_camera_frame(bot, update, user_data):
+def send_frame(bot, update, user_data):
     while True:
         if is_cat('gray.jpg'):
             bot.send_photo(chat_id=update.message.chat.id, photo=open('gray.jpg', 'rb'))
@@ -52,7 +48,7 @@ def send_camera_frame(bot, update, user_data):
             time.sleep(1)
 
 
-def check_user_photo(bot, update, user_data):
+def check_photo(bot, update, user_data):
     update.message.reply_text('Обрабатываю фото')
     os.makedirs('downloads', exist_ok=True)
     photo_file = bot.getFile(update.message.photo[-1].file_id)
