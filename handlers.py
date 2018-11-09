@@ -1,19 +1,42 @@
 import logging
 import os
+from random import choice
 import time
 
-from camer_frame import get_cv2
-from utils import is_cat
+import clarifai
+from clarifai.rest import ClarifaiApp
+
+import settings
+
+
+def is_cat(file_name):
+    image_has_cat = False
+    try:
+        app = ClarifaiApp(api_key=settings.CLARIFAI_API)
+        model = app.public_models.general_model
+        response = model.predict_by_filename(file_name, max_concepts=200)
+        if response['status']['code'] == 10000:
+            for concept in response['outputs'][0]['data']['concepts']:
+                if concept['name'] == 'cat':
+                    print(concept['value'])
+                    logging.info(concept['value'])
+                    image_has_cat = True
+        else:
+            print(response['status']['code'])
+    except clarifai.errors.ApiError:
+        logging.info('clarifai.errors.ApiError')
+    return image_has_cat
 
 
 def greet_user(bot, update, user_data):
-    text = 'Привет {}'.format(update.message.chat.first_name)
+    text = 'Привет {}! Введи команду /frame'.format(update.message.chat.first_name)
     logging.info(text)
     update.message.reply_text(text)
 
 
 def talk_to_me(bot, update, user_data):
-    user_text = 'Привет, {}! Ты написал {}'.format(update.message.chat.first_name, update.message.text)
+    user_text = 'Привет, {}! Ты написал {}. Введи команду /frame'.format(update.message.chat.first_name,
+                                                                        update.message.text)
     logging.info('User: {}, Chat id: {}, message: {}'.format(update.message.chat.username, 
                                                             update.message.chat.id, update.message.text))
     update.message.reply_text(user_text)
