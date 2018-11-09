@@ -17,15 +17,10 @@ def is_cat(file_name):
             for concept in response['outputs'][0]['data']['concepts']:
                 if concept['name'] == 'cat':
                     print(concept['value'])
+                    logging.info(concept['value'])
                     image_has_cat = True
         else:
             print(response['status']['code'])
-    except clarifai.errors.ApiError as e:
-        logging.info(e)
-        print('Ошибка опять')
-
+    except clarifai.errors.ApiError:
+        logging.info('clarifai.errors.ApiError')
     return image_has_cat
-
-
-if __name__ == '__main__':
-    print(is_cat('images/catwoman.jpg'))

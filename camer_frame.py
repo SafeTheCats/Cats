@@ -7,7 +7,8 @@ import settings
 
 
 def get_cv2():
-    cap = cv2.VideoCapture(0)
+    os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
+    cap = cv2.VideoCapture(settings.IP_CAMERA, cv2.CAP_FFMPEG)
 
     while True:
         ret, frame = cap.read()
@@ -19,4 +20,4 @@ def get_cv2():
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    get_cv2()
+	get_cv2()
