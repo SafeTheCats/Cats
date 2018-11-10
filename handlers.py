@@ -25,7 +25,7 @@ def is_cat(file_name):
 
 
 def greet_user(bot, update, user_data):
-    text = '''Приветствую, {}, Вы используете бота - Find Cat.
+    text = '''Приветствую, {}! Вы используете бота - Safer-Cats.
 \nЭто бот, который определяет наличие кота на фотографии, проект разработан в рамках курса Learn Python!
 \nВведите команду /frame'''.format(update.message.chat.first_name)
     logging.info('greet user')
