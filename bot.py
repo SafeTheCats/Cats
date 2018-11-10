@@ -13,7 +13,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
 
 
 def main():
-    mybot = Updater(settings.API_KEY, request_kwargs=settings.PROXY)
+    mybot = Updater(settings.TELEGRAM_API, request_kwargs=settings.PROXY)
     logging.info('Bot запущен')
 
     dp = mybot.dispatcher

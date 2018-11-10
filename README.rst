@@ -22,9 +22,11 @@ Safer-Cats создан и модифицируется в течение обу
 
     API_KEY = 'API ключ, который вы получили у BotFather'
 
-    CLARIFAI_API = 'API ключ, который вы полулите на сайте https://clarifai.com/'
+    CLARIFAI_API = 'API ключ, который вы получили на сайте https://clarifai.com/'
 
     IP_CAMERA = 0  # По умолчанию 0, нужно ввести адрес камеры. Например: IP_CAMERA = "rtsp://10.42.0.57:554/onvif1"
+
+Необходимо установить библиотеки telegram-bot, OpenCV и Clarifai.
 
 Запуск
 ------
